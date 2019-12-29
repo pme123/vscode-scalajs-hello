@@ -1,6 +1,6 @@
 # vscode-scalajs-hello
 
-This Project is a port of the [helloworld-minimal-sample] to [ScalaJS].
+This Project is a port of the [helloworld-minimal-sample] to [ScalaJS]. It is based on the extension [accessible-scala].
 
 Please check there on how to describe a VSCode Extension.
 
@@ -56,6 +56,7 @@ The project uses the following:
 * Publishing to the Marketplace.
 * Add Testing.
 
+[accessible-scala]: https://marketplace.visualstudio.com/items?itemName=scala-center.accessible-scala
 [helloworld-minimal-sample]: https://github.com/Microsoft/vscode-extension-samples/tree/master/helloworld-minimal-sample
 [Scalably Typed]: https://github.com/oyvindberg/ScalablyTyped
 [SBT]: https://www.scala-sbt.org

@@ -41,8 +41,12 @@ lazy val root = project
     artifactPath in (Compile, fastOptJS) := baseDirectory.value / "out" / "extension.js",
     artifactPath in (Compile, fullOptJS) := baseDirectory.value / "out" / "extension.js",
     open := openVSCodeTask.dependsOn(fastOptJS in Compile).value,
-    libraryDependencies ++= Seq(ScalablyTyped.V.`vscode`),
-    npmDependencies in Compile ++= Seq("vscode" -> "1.41")
+    libraryDependencies ++= Seq(
+      ScalablyTyped.V.`vscode`,
+      "com.lihaoyi" %%% "utest" % "0.7.1" % "test"
+    ),
+    npmDependencies in Compile ++= Seq("vscode" -> "1.41"),
+    testFrameworks += new TestFramework("utest.runner.Framework")
     // publishMarketplace := publishMarketplaceTask.dependsOn(fullOptJS in Compile).value
   )
   .enablePlugins(ScalaJSPlugin, ScalaJSBundlerPlugin)
