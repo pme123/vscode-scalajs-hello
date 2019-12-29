@@ -1,31 +1,35 @@
+import typings.vscode
+import typings.vscode.{Anon_Dispose, Thenable, vscodeMod}
+import typings.vscode.vscodeMod.ExtensionContext
 
-import vscode.{ExtensionContext}
-
+import scala.collection.immutable
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExportTopLevel
+import scala.scalajs.js.UndefOr
 
 object extension {
   @JSExportTopLevel("activate")
   def activate(context: ExtensionContext): Unit = {
 
-    println("""Congratulations, your extension "vscode-scalajs-hello" is now active!""")
-    
-    def showHello(): js.Function =
-		() => vscode.window.showInformationMessage("Hello VS Code!")
+    println(
+      """Congratulations, your extension "vscode-scalajs-hello" is now active!"""
+    )
+
+    def showHello(): js.Function1[js.Any, Thenable[UndefOr[String]]] =
+      in => vscodeMod.window.showInformationMessage(s"Hello World $in!")
 
     val commands = List(
       ("extension.helloWorld", showHello())
-      )
-          println(s"""commands $commands""")
+    )
 
     commands.foreach {
       case (name, fun) =>
-          println(s"""added $name""")
         context.subscriptions.push(
-          vscode.commands.registerCommand(name, fun)
+          vscodeMod.commands
+            .registerCommand(name, fun)
+            .asInstanceOf[Anon_Dispose]
         )
     }
-
 
   }
 }

@@ -1,6 +1,6 @@
 # vscode-scalajs-hello
 
-This Project is a port of the [helloworld-minimal-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/helloworld-minimal-sample) to ScalaJS.
+This Project is a port of the [helloworld-minimal-sample] to [ScalaJS].
 
 Please check there on how to describe a VSCode Extension.
 
@@ -9,62 +9,55 @@ A step-by-step tutorial for **ScalaJS** using this example project.
 
 Here is the original: [visualstudio.com/api/get-started](https://code.visualstudio.com/api/get-started/your-first-extension)
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Setup
 
-For example if there is an image subfolder under your extension project workspace:
+* Clone this project:
 
-\!\[feature X\]\(images/feature-x.png\)
+      git clone https://github.com/pme123/vscode-scalajs-hello.git
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+* Open VSCode in the `sbt` console:
 
-## Requirements
+      open
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+  This will run `fastOptJS`and then open the Extension Host of _VSCode_.
 
-## Extension Settings
+* Run the Hello World command from the Command Palette (`⇧⌘P`) in the new VSCode window.
+* Type `hello` and select `Hello World`.
+  * You should see a Notification _Hello World!_.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Debug your Extension
 
-For example:
+There seems not to be support for debugging Scala code directly in _VSCode_ (at least I did not find how to do this).
 
-This extension contributes the following settings:
+However you can achieve this:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+1. Run the extension from VSCode. There is a launch configuration in `.vscode/launch.json`. so just press `F5` and another _VS Code_ window opens in debug mode.
+2. You have to set the Breakpoints in the generated Javascript (`out/extension.js`). Through `extension.js.map` the breakpoint will stop in your Scala code.
 
-## Known Issues
+> If you work in this mode, make sure in your _sbt console_ to transpile to Javascript continuously (`~fastOptJS`). So you see all your changes.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+ ## How-To / Further Information
+Check out the (vsc-extension-quickstart.md) for some general _VSCode Extension_ explanations.
 
-## Release Notes
+The project uses the following:
+* **ScalaJS** for general coding: [ScalaJS]
 
-Users appreciate release notes as you update your extension.
+  The `extension.js` from [helloworld-minimal-sample], is now `src/main/scala/extension.scala`.
 
-### 1.0.0
+* **ScalablyTyped** for JavaScript facades: [Scalably Typed]
 
-Initial release of ...
+  The Hello World only uses the `vscode` bindings. But you can use any other _Typescript_ binding supported by _ScalablyTyped_.
 
-### 1.0.1
+* **sbt** for building the project: [SBT]
+* **scalajs-bundler** for bundling the JavaScript dependencies: [scalajs-bundler].
 
-Fixed issue #.
+## Open Points
 
-### 1.1.0
+* Publishing to the Marketplace.
+* Add Testing.
 
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[helloworld-minimal-sample]: https://github.com/Microsoft/vscode-extension-samples/tree/master/helloworld-minimal-sample
+[Scalably Typed]: https://github.com/oyvindberg/ScalablyTyped
+[SBT]: https://www.scala-sbt.org
+[ScalaJS]: http://www.scala-js.org
+[scalajs-bundler]: https://github.com/scalacenter/scalajs-bundler

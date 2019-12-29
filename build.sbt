@@ -34,13 +34,15 @@ lazy val root = project
   .in(file("."))
   .settings(scalajsSettings)
   .settings(
-    scalaVersion := "2.13.1",
+    scalaVersion := "2.12.10",
     moduleName := "vscode-scalajs-hello",
     scalacOptions += "-P:scalajs:sjsDefinedByDefault",
     scalaJSModuleKind := ModuleKind.CommonJSModule,
     artifactPath in (Compile, fastOptJS) := baseDirectory.value / "out" / "extension.js",
     artifactPath in (Compile, fullOptJS) := baseDirectory.value / "out" / "extension.js",
-    open := openVSCodeTask.dependsOn(fastOptJS in Compile).value
+    open := openVSCodeTask.dependsOn(fastOptJS in Compile).value,
+    libraryDependencies ++= Seq(ScalablyTyped.V.`vscode`),
+    npmDependencies in Compile ++= Seq("vscode" -> "1.41")
     // publishMarketplace := publishMarketplaceTask.dependsOn(fullOptJS in Compile).value
   )
-  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSPlugin, ScalaJSBundlerPlugin)
