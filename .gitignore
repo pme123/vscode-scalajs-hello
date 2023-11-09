@@ -5,5 +5,8 @@ node_modules
 out
 /.bloop/
 /project/.bloop/
-/project/project/target/
+/project/metals.sbt
+/project/project/
 /project/target/
+/.bsp/
+/.vscode/settings.json
